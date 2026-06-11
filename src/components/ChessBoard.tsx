@@ -19,7 +19,6 @@ const ChessBoard: React.FC<Props> = ({
   game,
   inCheckSquare,
 }) => {
-  const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
   const [moveSquares, setMoveSquares] = useState<{ [square: string]: React.CSSProperties }>({});
 
   const handleSquareClick = (square: Square) => {
@@ -40,10 +39,8 @@ const ChessBoard: React.FC<Props> = ({
         backgroundColor: "#fffc90",
       };
 
-      setSelectedSquare(square);
       setMoveSquares(highlights);
     } else {
-      setSelectedSquare(null);
       setMoveSquares({});
     }
   };
@@ -91,7 +88,6 @@ const ChessBoard: React.FC<Props> = ({
         onPieceDrop={(sourceSquare, targetSquare) => {
           const success = onOpponentMove(sourceSquare, targetSquare);
           if (success) {
-            setSelectedSquare(null);
             setMoveSquares({});
           }
           return success;
